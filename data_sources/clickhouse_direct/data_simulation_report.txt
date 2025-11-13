@@ -1,0 +1,101 @@
+# PBAPP ClickHouse Data Warehouse Simulation Report
+
+## Overview
+This document details the data simulation assumptions, patterns, and implementation for
+the Penang Water Authority (PBAPP) data warehouse simulation.
+
+## Key Assumptions for Realistic Data
+
+### 1. Temporal Consistency
+- All fact tables use the same date range (last 30 days to present)
+- Dates are selected from the same pool across all fact tables
+- Updates to dim_time ensure the latest day is always available
+
+### 2. Customer Behavior Patterns
+- Each customer has a consistent behavior profile:
+  * Consumption variance: 0.8-1.2x multiplier on base consumption
+  * Payment reliability: "reliable" (70%), "occasional_late" (20%), "problematic" (10%)
+  * Ticket frequency: "low" (80%), "medium" (15%), "high" (5%)
+  * Satisfaction baseline: 3.0-5.0 on a 5-point scale
+  * NPS tendency: -1.0 to 10.0 baseline score
+  * Primary district: Consistently associated with specific districts
+  * Tariff category: Consistent for each customer
+
+### 3. Seasonal Water Patterns
+- Dry season (Dec-Mar): Higher consumption (1.1-1.3x multiplier)
+- Rainy season (Jun-Oct): Lower consumption (0.7-0.9x multiplier)
+- Transition periods have moderate consumption (0.9-1.1x multiplier)
+
+### 4. Facility-District Relationships
+- Facilities serve specific districts
+- Customer billing and tickets are linked to facilities in their district
+- Accurate district-facility mapping reflects real-world service areas
+
+### 5. Agent Performance Patterns
+- Agents have consistent skill levels: Junior, Intermediate, Senior, Expert
+- Efficiency scores (0.7-1.0) affect all performance metrics
+- More experienced agents have:
+  * Higher ticket handling capacity
+  * Lower average handle times
+  * Fewer escalations and reopened tickets
+  * Better SLA compliance
+
+### 6. Customer Service Quality Correlations
+- First Contact Resolution improves satisfaction (+0.5)
+- Reopened tickets reduce satisfaction (-1.0)
+- SLA breaches reduce satisfaction (-1.0)
+- Quick response time improves satisfaction (+0.2)
+- Customer satisfaction directly impacts NPS scores
+- Resolution complexity affects Customer Effort Score
+
+### 7. Data Volume Distribution
+- Billing distribution by tariff category:
+  * Domestic: 65%
+  * Commercial: 20%
+  * Industrial: 10%
+  * Government: 3%
+  * Non-Profit: 2%
+
+- Ticket distribution by priority:
+  * Low: 40%
+  * Medium: 35%
+  * High: 20%
+  * Critical: 5%
+
+- Ticket distribution by category:
+  * Billing Dispute: 25%
+  * Water Quality: 15%
+  * Leakage: 20%
+  * No Water: 10%
+  * Pressure Issues: 10%
+  * Other categories: 20% combined
+
+- Ticket channel distribution:
+  * Phone: 45%
+  * Web Portal: 25%
+  * Mobile App: 15%
+  * Email: 10%
+  * In Person: 3%
+  * Social Media: 2%
+
+## Implementation Details
+
+### Dimension Tables
+- dim_time: 2 years back + 1 year forward (1096 days)
+- dim_customer: 1,000 customers with consistent profiles
+- dim_facility: 7 water facilities from configuration
+- dim_department: 7 departments with manager names
+
+### Fact Tables
+- fact_tickets: Customer service metrics with satisfaction and response time
+- fact_agent_performance: Agent efficiency and workload metrics
+- fact_billing: Revenue metrics with payment patterns
+
+### Dashboard Support
+The simulation specifically supports these dashboard requirements:
+1. Customer Service Performance (Executive Summary)
+2. Operational Efficiency Dashboard
+3. Billing & Revenue Insights
+
+The data includes correlated metrics that allow for meaningful analysis across
+these different business perspectives.
