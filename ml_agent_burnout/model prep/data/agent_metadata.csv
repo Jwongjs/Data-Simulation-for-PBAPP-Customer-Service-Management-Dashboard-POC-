@@ -1,0 +1,21 @@
+agent_id,agent_name,department_id,role_title,hire_date
+1,Roger Maddox,4,Senior Agent,2023-11-13
+2,Christian Cooper,4,Team Lead,2021-11-13
+3,Jessica Williams,4,Supervisor,2018-11-14
+4,Michael Quinn,4,Agent,2025-11-12
+5,Edward Ashley,4,Senior Agent,2022-11-13
+6,Mrs. Alexandra Smith MD,4,Team Lead,2021-11-13
+7,Joshua Prince,4,Supervisor,2017-11-14
+8,Kelly Klein,4,Agent,2025-11-12
+9,James Love,4,Senior Agent,2022-11-13
+10,Sean Cole,4,Team Lead,2021-11-13
+11,Scott English,5,Supervisor,2016-11-14
+12,Mr. Donald Reed,5,Agent,2024-11-12
+13,Shannon Smith,5,Senior Agent,2022-11-13
+14,Jessica Gray,5,Team Lead,2021-11-13
+15,Theodore Moore,5,Supervisor,2018-11-14
+16,Ashley Brown,5,Agent,2024-11-12
+17,Chloe Wise,5,Senior Agent,2022-11-13
+18,Kelly Sullivan,5,Team Lead,2021-11-13
+19,Emily Hart,5,Supervisor,2019-11-14
+20,Brian Reese,5,Agent,2025-11-12

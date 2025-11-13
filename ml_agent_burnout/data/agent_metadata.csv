@@ -1,0 +1,21 @@
+agent_id,agent_name,department_id,role_title,hire_date
+1,Steven Frye,4,Senior Agent,2023-11-11
+2,David Jenkins,4,Team Lead,2021-11-11
+3,Sean Marshall,4,Supervisor,2018-11-12
+4,Jordan King,4,Agent,2025-11-10
+5,Daniel Gaines,4,Senior Agent,2022-11-11
+6,Rebecca Lewis,4,Team Lead,2021-11-11
+7,Brandy Hunt,4,Supervisor,2017-11-12
+8,Robin Jacobs,4,Agent,2025-11-10
+9,Matthew Mccarty,4,Senior Agent,2022-11-11
+10,Krista Hill,4,Team Lead,2021-11-11
+11,Jill Bell,5,Supervisor,2016-11-12
+12,Andrew Henderson,5,Agent,2024-11-10
+13,Kelly Johnson,5,Senior Agent,2022-11-11
+14,Cody Terry,5,Team Lead,2021-11-11
+15,Natalie Tucker,5,Supervisor,2018-11-12
+16,Stephanie Green,5,Agent,2024-11-10
+17,Kimberly Gibson,5,Senior Agent,2022-11-11
+18,Walter Hickman,5,Team Lead,2021-11-11
+19,Yolanda Johnson,5,Supervisor,2019-11-12
+20,Adriana Johnson,5,Agent,2025-11-10
