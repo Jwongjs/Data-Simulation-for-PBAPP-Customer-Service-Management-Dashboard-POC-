@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<clickhouse>
+    <logger>
+        <level>information</level>
+        <log>/var/log/clickhouse-server/clickhouse-server.log</log>
+        <errorlog>/var/log/clickhouse-server/clickhouse-server.err.log</errorlog>
+        <size>1000M</size>
+        <count>10</count>
+    </logger>
+
+    <listen_host>0.0.0.0</listen_host>
+    <listen_host>::</listen_host>
+    <http_port>8123</http_port>
+    <tcp_port>9000</tcp_port>
+    <interserver_http_port>9009</interserver_http_port>
+
+    <path>/var/lib/clickhouse/</path>
+    <tmp_path>/var/lib/clickhouse/tmp/</tmp_path>
+    <user_files_path>/var/lib/clickhouse/user_files/</user_files_path>
+    <format_schema_path>/var/lib/clickhouse/format_schemas/</format_schema_path>
+
+    <users_config>/etc/clickhouse-server/users.xml</users_config>
+
+    <profiles>
+        <default>
+            <max_query_size>2097152</max_query_size>
+            <max_memory_usage>0</max_memory_usage>
+            <load_balancing>random</load_balancing>
+        </default>
+    </profiles>
+
+    <default_profile>default</default_profile>
+    <default_database>pbapp_poc</default_database>
+    <timezone>Asia/Kuala_Lumpur</timezone>
+    <max_concurrent_queries>100</max_concurrent_queries>
+    <max_server_memory_usage>0</max_server_memory_usage>
+    <max_server_memory_usage_to_ram_ratio>0.9</max_server_memory_usage_to_ram_ratio>
+
+    <merge_tree>
+        <max_suspicious_broken_parts>5</max_suspicious_broken_parts>
+    </merge_tree>
+
+    <query_log>
+        <database>system</database>
+        <table>query_log</table>
+        <partition_by>toYYYYMM(event_date)</partition_by>
+        <flush_interval_milliseconds>7500</flush_interval_milliseconds>
+    </query_log>
+
+    <dictionaries_config>*_dictionary.xml</dictionaries_config>
+    <builtin_dictionaries_reload_interval>3600</builtin_dictionaries_reload_interval>
+    <display_name>PBAPP ClickHouse</display_name>
+</clickhouse>
