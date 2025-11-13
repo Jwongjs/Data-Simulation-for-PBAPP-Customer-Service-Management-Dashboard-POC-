@@ -1,0 +1,25 @@
+# Data Generation
+faker
+kafka-python
+psycopg2-binary
+python-dateutil
+
+# Data Processing
+pandas
+pyarrow
+
+# Clickhouse 
+clickhouse-driver
+
+# Utilities
+python-dotenv
+requests
+
+# MinIO/S3
+boto3
+minio
+
+# Machine Learning
+scikit-learn
+xgboost
+joblib
