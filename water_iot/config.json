@@ -1,0 +1,204 @@
+{
+  "kafka": {
+    "bootstrap_servers": "localhost:9092",
+    "topic": "water_iot_stream",
+    "producer_config": {
+      "acks": "all",
+      "retries": 3,
+      "max_in_flight_requests_per_connection": 1
+    }
+  },
+  "simulation": {
+    "interval_seconds": 2
+  },
+  "facilities": {
+    "Sungai Dua Reservoir": {
+      "location": {
+        "latitude": 5.3500,
+        "longitude": 100.2900
+      },
+      "type": "reservoir",
+      "capacity_mld": 45,
+      "district": "Penang Island",
+      "supply_chain": "Chain A - Sungai Dua Network",
+      "downstream_facility": "Sungai Dua Water Treatment Plant",
+      "priority_sensors": ["water_level", "inflow_rate", "outflow_rate", "pressure"]
+    },
+    "Sungai Dua Water Treatment Plant": {
+      "location": {
+        "latitude": 5.3520,
+        "longitude": 100.2920
+      },
+      "type": "treatment_plant",
+      "capacity_mld": 150,
+      "district": "Penang Island",
+      "supply_chain": "Chain A - Sungai Dua Network",
+      "upstream_facility": "Sungai Dua Reservoir",
+      "downstream_facility": "Sungai Dua Distribution Center",
+      "priority_sensors": ["flow_rate", "pressure", "water_quality_ph", "chlorine_residual", "energy_consumption", "pump_status"]
+    },
+    "Sungai Dua Distribution Center": {
+      "location": {
+        "latitude": 5.3500,
+        "longitude": 100.2900
+      },
+      "type": "distribution_center",
+      "capacity_mld": 50,
+      "district": "Penang Island",
+      "supply_chain": "Chain A - Sungai Dua Network",
+      "upstream_facility": "Sungai Dua Water Treatment Plant",
+      "priority_sensors": ["pressure", "flow_rate", "chlorine_residual", "leakage_detection", "water_quality_ph"]
+    },
+    "Teluk Bahang Dam": {
+      "location": {
+        "latitude": 5.4589,
+        "longitude": 100.2089
+      },
+      "type": "dam",
+      "capacity_mld": 16.5,
+      "district": "Penang Island",
+      "supply_chain": "Chain B - North Island",
+      "downstream_facility": "Batu Ferringhi Pumping Station",
+      "priority_sensors": ["water_level", "inflow_rate", "outflow_rate", "pressure"]
+    },
+    "Teluk Bahang Water Treatment Plant": {
+      "location": {
+        "latitude": 5.4582,
+        "longitude": 100.2255
+      },
+      "type": "treatment_plant",
+      "capacity_mld": 60,
+      "district": "Penang Island",
+      "supply_chain": "Chain B - North Island",
+      "upstream_facility": "Teluk Bahang Dam",
+      "downstream_facility": "Batu Ferringhi Pumping Station",
+      "priority_sensors": ["flow_rate", "pressure", "water_quality_ph", "chlorine_residual", "energy_consumption", "pump_status"]
+    },
+    "Batu Ferringhi Pumping Station": {
+      "location": {
+        "latitude": 5.47,
+        "longitude": 100.2467
+      },
+      "type": "pumping_station",
+      "capacity_mld": 15,
+      "district": "Penang Island",
+      "supply_chain": "Chain B - North Island",
+      "upstream_facility": "Teluk Bahang Dam",
+      "downstream_facility": "Georgetown Distribution Network",
+      "priority_sensors": ["flow_rate", "pressure", "energy_consumption", "pump_status", "uptime_status"]
+    },
+    "Georgetown Distribution Network": {
+      "location": {
+        "latitude": 5.4141,
+        "longitude": 100.3288
+      },
+      "type": "distribution_center",
+      "capacity_mld": 80,
+      "district": "Penang Island",
+      "supply_chain": "Chain B - North Island",
+      "upstream_facility": "Batu Ferringhi Pumping Station",
+      "priority_sensors": ["pressure", "flow_rate", "chlorine_residual", "leakage_detection", "water_quality_ph"]
+    }
+  },
+  "sensors": {
+    "water_level": {
+      "unit": "meters",
+      "normal_range": [2.5, 8.5],
+      "critical_low": 2.0,
+      "critical_high": 10.0,
+      "anomaly_chance": 0.01,
+      "facility_types": ["dam", "reservoir"],
+      "analytics_category": "supply_sustainability"
+    },
+    "flow_rate": {
+      "unit": "m3/s",
+      "normal_range": [5.0, 50.0],
+      "critical_low": 3.0,
+      "critical_high": 80.0,
+      "anomaly_chance": 0.015,
+      "facility_types": ["treatment_plant", "pumping_station", "distribution_center"],
+      "analytics_category": "nrw_efficiency"
+    },
+    "water_quality_ph": {
+      "unit": "pH",
+      "normal_range": [6.5, 8.5],
+      "critical_low": 5.5,
+      "critical_high": 9.5,
+      "anomaly_chance": 0.008,
+      "facility_types": ["treatment_plant", "distribution_center"],
+      "analytics_category": "quality_compliance"
+    },
+    "chlorine_residual": {
+      "unit": "mg/L",
+      "normal_range": [0.2, 1.0],
+      "critical_low": 0.1,
+      "critical_high": 2.0,
+      "anomaly_chance": 0.01,
+      "facility_types": ["treatment_plant", "distribution_center"],
+      "analytics_category": "quality_compliance"
+    },
+    "pressure": {
+      "unit": "bar",
+      "normal_range": [2.0, 5.0],
+      "critical_low": 1.5,
+      "critical_high": 6.5,
+      "anomaly_chance": 0.015,
+      "facility_types": ["treatment_plant", "pumping_station", "distribution_center", "reservoir", "dam"],
+      "analytics_category": "nrw_diagnostics"
+    },
+    "energy_consumption": {
+      "unit": "kWh",
+      "normal_range": [100.0, 500.0],
+      "critical_low": 50.0,
+      "critical_high": 800.0,
+      "anomaly_chance": 0.012,
+      "facility_types": ["treatment_plant", "pumping_station"],
+      "analytics_category": "energy_efficiency"
+    },
+    "pump_status": {
+      "unit": "boolean",
+      "normal_range": [0, 1],
+      "critical_low": 0,
+      "critical_high": 1,
+      "anomaly_chance": 0.005,
+      "facility_types": ["treatment_plant", "pumping_station"],
+      "analytics_category": "asset_reliability"
+    },
+    "uptime_status": {
+      "unit": "percentage",
+      "normal_range": [95.0, 100.0],
+      "critical_low": 80.0,
+      "critical_high": 100.0,
+      "anomaly_chance": 0.008,
+      "facility_types": ["pumping_station"],
+      "analytics_category": "asset_reliability"
+    },
+    "inflow_rate": {
+      "unit": "m3/s",
+      "normal_range": [1.0, 20.0],
+      "critical_low": 0.5,
+      "critical_high": 50.0,
+      "anomaly_chance": 0.015,
+      "facility_types": ["dam", "reservoir"],
+      "analytics_category": "nrw_planning"
+    },
+    "outflow_rate": {
+      "unit": "m3/s",
+      "normal_range": [1.0, 15.0],
+      "critical_low": 0.5,
+      "critical_high": 40.0,
+      "anomaly_chance": 0.012,
+      "facility_types": ["dam", "reservoir"],
+      "analytics_category": "nrw_planning"
+    },
+    "leakage_detection": {
+      "unit": "L/min",
+      "normal_range": [0.0, 2.0],
+      "critical_low": 0.0,
+      "critical_high": 10.0,
+      "anomaly_chance": 0.02,
+      "facility_types": ["distribution_center"],
+      "analytics_category": "nrw_maintenance"
+    }
+  }
+}
